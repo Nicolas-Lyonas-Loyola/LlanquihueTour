@@ -14,12 +14,12 @@ Diseñar e implementar un modelo básico de clases que permita representar perso
 
 ## Tecnologías utilizadas
 
-* Java
-* IntelliJ IDEA
-  JDK 17
-  Proyecto probado con JDK 17
-* GitHub
-
+- Java
+- IntelliJ IDEA
+- JDK 17
+- Proyecto probado con JDK 17
+- GitHub
+  
 ## Estructura del proyecto
 
 ```text
