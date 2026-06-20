@@ -1,65 +1,121 @@
 package app;
 
-import model.Cliente;
-import model.Direccion;
-import model.Empleado;
-import model.GuiaTuristico;
+import service.GestorColaboradores;
 
+import java.util.Scanner;
+
+/**
+ * Clase principal de Llanquihue Tour.
+ * Coordina la carga, visualización, búsqueda y filtrado
+ * de los colaboradores turísticos.
+ */
 public class Main {
 
     public static void main(String[] args) {
 
-        Direccion direccionCliente = new Direccion("Costanera", 120, "Llanquihue", "Los Lagos");
-        Direccion direccionGuia = new Direccion("Los Volcanes", 455, "Puerto Varas", "Los Lagos");
-        Direccion direccionEmpleado = new Direccion("Vicente Pérez Rosales", 890, "Frutillar", "Los Lagos");
+        Scanner teclado = new Scanner(System.in);
+        GestorColaboradores gestor = new GestorColaboradores();
 
-        Cliente cliente1 = new Cliente(
-                "Camila Rojas",
-                "12.345.678-9",
-                "camila.rojas@email.com",
-                "+56 9 1234 5678",
-                direccionCliente,
-                "Tour gastronómico",
-                3
-        );
+        // Carga inicial de colaboradores desde el archivo externo.
+        gestor.cargarDesdeArchivo("resources/colaboradores.csv");
 
-        GuiaTuristico guia1 = new GuiaTuristico(
-                "Felipe Soto",
-                "15.987.654-3",
-                "felipe.soto@llanquihuetour.cl",
-                "+56 9 8765 4321",
-                direccionGuia,
-                "Excursiones culturales",
-                6
-        );
+        int opcion = -1;
 
-        Empleado empleado1 = new Empleado(
-                "María Torres",
-                "18.456.789-1",
-                "maria.torres@llanquihuetour.cl",
-                "+56 9 5555 4444",
-                direccionEmpleado,
-                "Coordinadora de reservas",
-                "Operaciones"
-        );
+        do {
+            mostrarMenu();
 
-        System.out.println("=======================================");
-        System.out.println("       SISTEMA LLANQUIHUE TOUR");
-        System.out.println("=======================================");
-        System.out.println();
+            try {
+                System.out.print("Seleccione una opción: ");
+                opcion = Integer.parseInt(teclado.nextLine().trim());
 
-        System.out.println(cliente1);
-        System.out.println();
+                switch (opcion) {
 
-        System.out.println("---------------------------------------");
-        System.out.println();
+                    case 1:
+                        System.out.println(
+                                "\n========== TODOS LOS COLABORADORES =========="
+                        );
+                        gestor.mostrarTodos();
+                        break;
 
-        System.out.println(guia1);
-        System.out.println();
+                    case 2:
+                        System.out.println(
+                                "\n========== COLABORADORES ACTIVOS =========="
+                        );
+                        gestor.mostrarActivos();
+                        break;
 
-        System.out.println("---------------------------------------");
-        System.out.println();
+                    case 3:
+                        System.out.print(
+                                "Ingrese el tipo de colaborador "
+                                        + "(Guía, Operador o Proveedor): "
+                        );
 
-        System.out.println(empleado1);
+                        String tipo = teclado.nextLine().trim();
+
+                        System.out.println(
+                                "\n========== BÚSQUEDA POR TIPO =========="
+                        );
+                        gestor.buscarPorTipo(tipo);
+                        break;
+
+                    case 4:
+                        System.out.print(
+                                "Ingrese la comuna que desea consultar: "
+                        );
+
+                        String comuna = teclado.nextLine().trim();
+
+                        System.out.println(
+                                "\n========== FILTRO POR COMUNA =========="
+                        );
+                        gestor.filtrarPorComuna(comuna);
+                        break;
+
+                    case 5:
+                        System.out.println(
+                                "\nCantidad total de colaboradores: "
+                                        + gestor.obtenerCantidadColaboradores()
+                        );
+                        break;
+
+                    case 0:
+                        System.out.println(
+                                "\nPrograma finalizado correctamente."
+                        );
+                        break;
+
+                    default:
+                        System.out.println(
+                                "\nOpción no válida. Intente nuevamente."
+                        );
+                }
+
+            } catch (NumberFormatException error) {
+                System.out.println(
+                        "\nEntrada no válida. Debe ingresar un número."
+                );
+                opcion = -1;
+            }
+
+        } while (opcion != 0);
+
+        teclado.close();
+    }
+
+    /**
+     * Muestra las opciones disponibles en la aplicación.
+     */
+    private static void mostrarMenu() {
+
+        System.out.println("\n==========================================");
+        System.out.println("         LLANQUIHUE TOUR APP");
+        System.out.println("==========================================");
+        System.out.println("1. Mostrar todos los colaboradores");
+        System.out.println("2. Mostrar colaboradores activos");
+        System.out.println("3. Buscar colaboradores por tipo");
+        System.out.println("4. Filtrar colaboradores por comuna");
+        System.out.println("5. Mostrar cantidad de colaboradores");
+        System.out.println("0. Salir");
+        System.out.println("==========================================");
     }
 }

@@ -1,160 +1,140 @@
-# Llanquihue Tour
+# Llanquihue Tour App
 
-## Descripción del proyecto
+Aplicación de consola desarrollada en Java para gestionar información de las personas que colaboran con la agencia turística Llanquihue Tour.
 
-Este proyecto corresponde a una aplicación básica desarrollada en Java para la agencia de turismo **Llanquihue Tour**, ubicada en la Región de Los Lagos.
-
-El objetivo del sistema es representar de forma estructurada a distintas personas vinculadas a la agencia, tales como clientes, guías turísticos y empleados. Para ello se aplican principios de Programación Orientada a Objetos, incluyendo encapsulamiento, composición, herencia, reutilización de clases y organización modular mediante paquetes.
-
-Este proyecto corresponde a la **Actividad Sumativa de la Semana 3** de la asignatura **Desarrollo Orientado a Objetos I**.
+El sistema lee los datos desde un archivo externo, los transforma en objetos Java y los almacena en una colección dinámica. Posteriormente permite recorrer, buscar y filtrar los registros mediante un menú de consola.
 
 ## Objetivo
 
-Diseñar e implementar un modelo básico de clases que permita representar personas relacionadas con la operación de una agencia de turismo, evitando duplicación de datos y separando responsabilidades entre las clases del sistema.
+Desarrollar una aplicación modular que aplique Programación Orientada a Objetos, lectura de archivos, colecciones y separación de responsabilidades.
 
 ## Tecnologías utilizadas
 
-- Java
-- IntelliJ IDEA
-- JDK 17
-- Proyecto probado con JDK 17
-- GitHub
-  
+* Java
+* JDK 17
+* IntelliJ IDEA
+* Git
+* GitHub
+* Archivo CSV
+
 ## Estructura del proyecto
 
 ```text
 LlanquihueTour
-└── src
-    ├── app
-    │   └── Main.java
-    │
-    └── model
-        ├── Direccion.java
-        ├── Persona.java
-        ├── Cliente.java
-        ├── GuiaTuristico.java
-        └── Empleado.java
+├── resources
+│   └── colaboradores.csv
+│
+├── src
+│   ├── app
+│   │   └── Main.java
+│   │
+│   ├── model
+│   │   ├── Direccion.java
+│   │   ├── Persona.java
+│   │   └── ColaboradorTuristico.java
+│   │
+│   ├── service
+│   │   └── GestorColaboradores.java
+│   │
+│   └── util
+│       └── ValidadorDatos.java
+│
+└── README.md
 ```
 
-## Paquetes del proyecto
+## Paquetes y responsabilidades
 
-### Paquete `model`
+### `model`
 
-Contiene las clases que representan el dominio del problema.
+Contiene las clases que representan los datos principales del sistema.
 
-* `Direccion`: representa los datos de ubicación de una persona.
-* `Persona`: clase base que contiene los datos comunes de una persona vinculada a la agencia.
-* `Cliente`: representa a un cliente de Llanquihue Tour.
-* `GuiaTuristico`: representa a un guía turístico que trabaja con la agencia.
-* `Empleado`: representa a un empleado administrativo u operativo de la agencia.
+* `Direccion`: almacena calle, número, comuna y región.
+* `Persona`: contiene los datos personales comunes de una persona.
+* `ColaboradorTuristico`: representa a un guía, operador o proveedor de la agencia.
 
-### Paquete `app`
+### `service`
 
-Contiene la clase principal del sistema.
+Contiene la lógica principal de gestión.
 
-* `Main`: clase encargada de crear objetos, relacionarlos y mostrar los resultados por consola.
+* `GestorColaboradores`: lee el archivo CSV, crea los objetos, los guarda en un `ArrayList` y permite realizar búsquedas y filtros.
 
-## Principios de Programación Orientada a Objetos aplicados
+### `util`
 
-### Encapsulamiento
+Contiene herramientas reutilizables.
 
-Todas las clases utilizan atributos privados (`private`) y métodos públicos `get` y `set` para acceder o modificar sus valores.
+* `ValidadorDatos`: valida la cantidad de campos, campos vacíos, números de dirección y estados booleanos.
 
-### Composición
+### `app`
 
-La clase `Persona` contiene un objeto de tipo `Direccion`, lo que representa la relación:
+Contiene la clase principal.
+
+* `Main`: inicia el programa, muestra el menú y coordina las operaciones del sistema.
+
+## Archivo de datos
+
+Los colaboradores se almacenan en:
 
 ```text
-Una Persona tiene una Dirección.
+resources/colaboradores.csv
 ```
 
-En Java, esta relación se implementa mediante el atributo:
-
-```java
-private Direccion direccion;
-```
-
-### Herencia
-
-Las clases `Cliente`, `GuiaTuristico` y `Empleado` heredan de la clase base `Persona`, reutilizando sus atributos comunes.
-
-Relaciones aplicadas:
+Cada línea utiliza el siguiente formato:
 
 ```text
-Cliente es una Persona.
-GuiaTuristico es una Persona.
-Empleado es una Persona.
+nombre;rut;correo;telefono;calle;numero;comuna;region;tipo;especialidad;activo
 ```
 
-En Java, esto se implementa mediante `extends Persona`.
+Ejemplo:
 
-## Clases implementadas
-
-### `Direccion`
-
-Representa una dirección física mediante los atributos:
-
-* calle
-* número
-* comuna
-* región
-
-### `Persona`
-
-Representa los datos generales de una persona:
-
-* nombre
-* RUT
-* correo
-* teléfono
-* dirección
-
-### `Cliente`
-
-Representa a un cliente de la agencia e incluye:
-
-* preferencia de tour
-* cantidad de reservas
-
-### `GuiaTuristico`
-
-Representa a un guía turístico e incluye:
-
-* especialidad
-* años de experiencia
-
-### `Empleado`
-
-Representa a un empleado de la agencia e incluye:
-
-* cargo
-* área de trabajo
-
-## Ejecución del programa
-
-Para ejecutar el proyecto:
-
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Verificar que el JDK esté configurado correctamente.
-3. Abrir la clase `Main.java`, ubicada en el paquete `app`.
-4. Ejecutar el método:
-
-```java
-public static void main(String[] args)
+```text
+Camila Soto;11.111.111-1;camila.soto@llanquihuetour.cl;+56 9 1111 1111;Los Arrayanes;123;Puerto Varas;Los Lagos;Guía;Rutas culturales;true
 ```
 
-5. Revisar la salida por consola.
+## Funcionalidades
 
-## Salida esperada
+El programa permite:
 
-El programa muestra por consola los datos de:
+1. Cargar colaboradores desde un archivo CSV.
+2. Mostrar todos los colaboradores.
+3. Mostrar solamente los colaboradores activos.
+4. Buscar colaboradores según su tipo.
+5. Filtrar colaboradores según su comuna.
+6. Mostrar la cantidad total de registros cargados.
+7. Validar datos incorrectos mediante `try-catch`.
+8. Mostrar mensajes claros por consola.
 
-* un cliente
-* un guía turístico
-* un empleado
+## Conceptos aplicados
 
-Cada objeto se imprime utilizando el método `toString()` correspondiente, mostrando la información de forma ordenada.
+* Encapsulamiento mediante atributos `private`.
+* Constructores.
+* Getters y setters.
+* Método `toString()`.
+* Herencia entre `Persona` y `ColaboradorTuristico`.
+* Composición entre `Persona` y `Direccion`.
+* Organización modular mediante paquetes.
+* Lectura de archivos con `BufferedReader`.
+* Separación de datos con `split(";")`.
+* Colección `ArrayList`.
+* Recorrido con `for-each`.
+* Búsqueda y filtrado.
+* Validaciones y manejo de excepciones.
+
+## Instrucciones de ejecución
+
+1. Descargar o clonar el repositorio.
+2. Abrir el proyecto en IntelliJ IDEA.
+3. Verificar que el proyecto utilice JDK 17.
+4. Confirmar que el archivo `colaboradores.csv` esté dentro de la carpeta `resources`.
+5. Ejecutar la clase:
+
+```text
+src/app/Main.java
+```
+
+6. Seleccionar las opciones disponibles en el menú de consola.
 
 ## Autor
 
 Nicolás Loyola
+Analista Programador Computacional
+Duoc UC
