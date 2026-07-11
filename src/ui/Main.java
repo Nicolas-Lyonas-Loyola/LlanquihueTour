@@ -1,6 +1,6 @@
-package app;
+package ui;
 
-import service.GestorColaboradores;
+import data.GestorColaboradores;
 
 import java.util.Scanner;
 
