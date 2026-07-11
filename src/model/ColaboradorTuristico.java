@@ -21,9 +21,9 @@ public class ColaboradorTuristico extends Persona {
             boolean activo
     ) {
         super(nombre, rut, correo, telefono, direccion);
-        this.tipoColaborador = tipoColaborador;
-        this.especialidad = especialidad;
-        this.activo = activo;
+        setTipoColaborador(tipoColaborador);
+        setEspecialidad(especialidad);
+        setActivo(activo);
     }
 
     public String getTipoColaborador() {
@@ -31,7 +31,13 @@ public class ColaboradorTuristico extends Persona {
     }
 
     public void setTipoColaborador(String tipoColaborador) {
-        this.tipoColaborador = tipoColaborador;
+        if (tipoColaborador == null || tipoColaborador.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "El tipo de colaborador no puede estar vacío."
+            );
+        }
+
+        this.tipoColaborador = tipoColaborador.trim();
     }
 
     public String getEspecialidad() {
@@ -39,7 +45,13 @@ public class ColaboradorTuristico extends Persona {
     }
 
     public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+        if (especialidad == null || especialidad.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "La especialidad no puede estar vacía."
+            );
+        }
+
+        this.especialidad = especialidad.trim();
     }
 
     public boolean isActivo() {

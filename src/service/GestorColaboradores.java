@@ -8,6 +8,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.text.Normalizer;
+import java.util.Locale;
+
 
 /**
  * Administra la colección de colaboradores turísticos.
@@ -16,7 +20,7 @@ import java.util.ArrayList;
  */
 public class GestorColaboradores {
 
-    private final ArrayList<ColaboradorTuristico> colaboradores;
+    private final List<ColaboradorTuristico> colaboradores;
 
     public GestorColaboradores() {
         colaboradores = new ArrayList<>();
@@ -52,41 +56,57 @@ public class GestorColaboradores {
                     System.out.println(
                             "Línea " + numeroLinea + " omitida por datos inválidos."
                     );
+                    System.out.println(
+                            "Contenido de la línea: " + linea
+                    );
+                    System.out.println("----------------------------------------");
                     continue;
                 }
 
-                String nombre = campos[0].trim();
-                String rut = campos[1].trim();
-                String correo = campos[2].trim();
-                String telefono = campos[3].trim();
-                String calle = campos[4].trim();
-                int numero = Integer.parseInt(campos[5].trim());
-                String comuna = campos[6].trim();
-                String region = campos[7].trim();
-                String tipoColaborador = campos[8].trim();
-                String especialidad = campos[9].trim();
-                boolean activo = Boolean.parseBoolean(campos[10].trim());
+                try {
+                    String nombre = campos[0].trim();
+                    String rut = campos[1].trim();
+                    String correo = campos[2].trim();
+                    String telefono = campos[3].trim();
+                    String calle = campos[4].trim();
+                    int numero = Integer.parseInt(campos[5].trim());
+                    String comuna = campos[6].trim();
+                    String region = campos[7].trim();
+                    String tipoColaborador = campos[8].trim();
+                    String especialidad = campos[9].trim();
+                    boolean activo = Boolean.parseBoolean(campos[10].trim());
 
-                Direccion direccion = new Direccion(
-                        calle,
-                        numero,
-                        comuna,
-                        region
-                );
+                    Direccion direccion = new Direccion(
+                            calle,
+                            numero,
+                            comuna,
+                            region
+                    );
 
-                ColaboradorTuristico colaborador =
-                        new ColaboradorTuristico(
-                                nombre,
-                                rut,
-                                correo,
-                                telefono,
-                                direccion,
-                                tipoColaborador,
-                                especialidad,
-                                activo
-                        );
+                    ColaboradorTuristico colaborador =
+                            new ColaboradorTuristico(
+                                    nombre,
+                                    rut,
+                                    correo,
+                                    telefono,
+                                    direccion,
+                                    tipoColaborador,
+                                    especialidad,
+                                    activo
+                            );
 
-                colaboradores.add(colaborador);
+                    colaboradores.add(colaborador);
+
+                } catch (IllegalArgumentException error) {
+                    System.out.println(
+                            "Línea " + numeroLinea
+                                    + " omitida: " + error.getMessage()
+                    );
+                    System.out.println(
+                            "Contenido de la línea: " + linea
+                    );
+                    System.out.println("----------------------------------------");
+                }
             }
 
             System.out.println(
@@ -156,8 +176,8 @@ public class GestorColaboradores {
 
         for (ColaboradorTuristico colaborador : colaboradores) {
 
-            if (colaborador.getTipoColaborador()
-                    .equalsIgnoreCase(tipoBuscado)) {
+            if (normalizarTexto(colaborador.getTipoColaborador())
+                    .contains(normalizarTexto(tipoBuscado))) {
 
                 System.out.println(colaborador);
                 System.out.println();
@@ -184,9 +204,8 @@ public class GestorColaboradores {
 
         for (ColaboradorTuristico colaborador : colaboradores) {
 
-            if (colaborador.getDireccion()
-                    .getComuna()
-                    .equalsIgnoreCase(comunaBuscada)) {
+            if (normalizarTexto(colaborador.getDireccion().getComuna())
+                    .contains(normalizarTexto(comunaBuscada))) {
 
                 System.out.println(colaborador);
                 System.out.println();
@@ -205,4 +224,21 @@ public class GestorColaboradores {
     public int obtenerCantidadColaboradores() {
         return colaboradores.size();
     }
+    /**
+     * Convierte un texto a minúsculas y elimina tildes.
+     * Ejemplo: "Guía" se transforma en "guia".
+     */
+    private String normalizarTexto(String texto) {
+
+        String textoNormalizado = Normalizer.normalize(
+                texto,
+                Normalizer.Form.NFD
+        );
+
+        return textoNormalizado
+                .replaceAll("\\p{M}", "")
+                .toLowerCase(Locale.ROOT)
+                .trim();
+    }
+
 }

@@ -11,11 +11,11 @@ public class Direccion {
     private String comuna;
     private String region;
 
-    public Direccion(String calle, int numero, String comuna, String region){
-        this.calle = calle;
-        this.numero = numero;
-        this.comuna = comuna;
-        this.region = region;
+    public Direccion(String calle, int numero, String comuna, String region) {
+        setCalle(calle);
+        setNumero(numero);
+        setComuna(comuna);
+        setRegion(region);
     }
 
     public String getCalle() {
@@ -23,7 +23,13 @@ public class Direccion {
     }
 
     public void setCalle(String calle) {
-        this.calle = calle;
+        if (calle == null || calle.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "La calle no puede estar vacía."
+            );
+        }
+
+        this.calle = calle.trim();
     }
 
     public int getNumero() {
@@ -31,6 +37,12 @@ public class Direccion {
     }
 
     public void setNumero(int numero) {
+        if (numero <= 0) {
+            throw new IllegalArgumentException(
+                    "El número de dirección debe ser mayor que cero."
+            );
+        }
+
         this.numero = numero;
     }
 
@@ -39,7 +51,13 @@ public class Direccion {
     }
 
     public void setComuna(String comuna) {
-        this.comuna = comuna;
+        if (comuna == null || comuna.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "La comuna no puede estar vacía."
+            );
+        }
+
+        this.comuna = comuna.trim();
     }
 
     public String getRegion() {
@@ -47,7 +65,13 @@ public class Direccion {
     }
 
     public void setRegion(String region) {
-        this.region = region;
+        if (region == null || region.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "La región no puede estar vacía."
+            );
+        }
+
+        this.region = region.trim();
     }
 
     public String toString() {

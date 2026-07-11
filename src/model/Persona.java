@@ -10,12 +10,14 @@ public class Persona {
     private String telefono;
     private Direccion direccion;
 
-    public Persona(String nombre, String rut, String correo, String telefono, Direccion direccion) {
-        this.nombre = nombre;
-        this.rut = rut;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.direccion = direccion;
+    public Persona(String nombre, String rut, String correo,
+                   String telefono, Direccion direccion) {
+
+        setNombre(nombre);
+        setRut(rut);
+        setCorreo(correo);
+        setTelefono(telefono);
+        setDireccion(direccion);
     }
 
     public String getNombre() {
@@ -23,7 +25,13 @@ public class Persona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "El nombre no puede estar vacío."
+            );
+        }
+
+        this.nombre = nombre.trim();
     }
 
     public String getRut() {
@@ -31,7 +39,13 @@ public class Persona {
     }
 
     public void setRut(String rut) {
-        this.rut = rut;
+        if (rut == null || rut.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "El RUT no puede estar vacío."
+            );
+        }
+
+        this.rut = rut.trim();
     }
 
     public String getCorreo() {
@@ -39,20 +53,41 @@ public class Persona {
     }
 
     public void setCorreo(String correo) {
-        this.correo = correo;
+        if (correo == null
+                || correo.trim().isEmpty()
+                || !correo.contains("@")) {
+
+            throw new IllegalArgumentException(
+                    "El correo electrónico no es válido."
+            );
+        }
+
+        this.correo = correo.trim();
     }
 
     public String getTelefono() {
         return telefono;
     }
     public void setTelefono(String telefono) {
-        this.telefono = telefono;
+        if (telefono == null || telefono.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "El teléfono no puede estar vacío."
+            );
+        }
+
+        this.telefono = telefono.trim();
     }
     public Direccion getDireccion(){
         return direccion;
     }
 
     public void setDireccion(Direccion direccion) {
+        if (direccion == null) {
+            throw new IllegalArgumentException(
+                    "La dirección no puede ser nula."
+            );
+        }
+
         this.direccion = direccion;
     }
 
