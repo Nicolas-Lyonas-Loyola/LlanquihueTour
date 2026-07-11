@@ -15,6 +15,7 @@ public class Main {
 
         Scanner teclado = new Scanner(System.in);
         GestorColaboradores gestor = new GestorColaboradores();
+        InterfazEntidades interfazEntidades = new InterfazEntidades();
 
         // Carga inicial de colaboradores desde el archivo externo.
         gestor.cargarDesdeArchivo("resources/colaboradores.csv");
@@ -78,6 +79,14 @@ public class Main {
                         );
                         break;
 
+                    case 6:
+                        System.out.println(
+                                "\nAbriendo gestión gráfica de entidades..."
+                        );
+
+                        interfazEntidades.iniciar();
+                        break;
+
                     case 0:
                         System.out.println(
                                 "\nPrograma finalizado correctamente."
@@ -115,6 +124,7 @@ public class Main {
         System.out.println("3. Buscar colaboradores por tipo");
         System.out.println("4. Filtrar colaboradores por comuna");
         System.out.println("5. Mostrar cantidad de colaboradores");
+        System.out.println("6. Abrir gestión gráfica de entidades");
         System.out.println("0. Salir");
         System.out.println("==========================================");
     }

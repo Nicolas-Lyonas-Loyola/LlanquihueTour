@@ -61,7 +61,7 @@ public class InterfazEntidades {
                     case 0:
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Programa finalizado.",
+                                "Volviendo al menú principal.",
                                 "Llanquihue Tour",
                                 JOptionPane.INFORMATION_MESSAGE
                         );
