@@ -29,7 +29,7 @@ public class GestorColaboradores {
     /**
      * Lee los colaboradores desde un archivo CSV.
      *
-     * @param rutaArchivo ubicación del archivo colaboradores.csv
+     * @param rutaArchivo ubicación del archivo colaboradores.txt
      */
     public void cargarDesdeArchivo(String rutaArchivo) {
 

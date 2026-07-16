@@ -1,5 +1,7 @@
 package model;
 
+import util.DatoInvalidoException;
+
 /**
  * Clase base que representa los datos comunes de una persona vinculada con la agencia.
  */
@@ -26,7 +28,7 @@ public class Persona {
 
     public void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El nombre no puede estar vacío."
             );
         }
@@ -40,7 +42,7 @@ public class Persona {
 
     public void setRut(String rut) {
         if (rut == null || rut.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El RUT no puede estar vacío."
             );
         }
@@ -57,7 +59,7 @@ public class Persona {
                 || correo.trim().isEmpty()
                 || !correo.contains("@")) {
 
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El correo electrónico no es válido."
             );
         }
@@ -70,7 +72,7 @@ public class Persona {
     }
     public void setTelefono(String telefono) {
         if (telefono == null || telefono.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El teléfono no puede estar vacío."
             );
         }
@@ -83,7 +85,7 @@ public class Persona {
 
     public void setDireccion(Direccion direccion) {
         if (direccion == null) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "La dirección no puede ser nula."
             );
         }
@@ -91,6 +93,7 @@ public class Persona {
         this.direccion = direccion;
     }
 
+    @Override
     public String toString() {
         return "Nombre: " + nombre + "\n" +
                 "RUT: " + rut + "\n" +

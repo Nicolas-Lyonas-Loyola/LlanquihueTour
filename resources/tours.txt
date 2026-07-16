@@ -1,0 +1,6 @@
+T001;Paseo Lacustre Lago Llanquihue;Lacustre;4;35000;true
+T002;Ruta Gastronómica de Frutillar;Gastronómico;5;42000;true
+T003;Circuito Cultural Puerto Varas;Cultural;3;28000;true
+T004;Excursión Volcán Osorno;Naturaleza;8;65000;true
+T005;Recorrido Patrimonial Llanquihue;Cultural;2;22000;true
+T006;Navegación Bahía de Puerto Montt;Lacustre;4;38000;false

@@ -1,5 +1,7 @@
 package model;
 
+import util.DatoInvalidoException;
+
 /**
  * Representa a una persona que colabora con Llanquihue Tour.
  * Puede corresponder a un guía, operador o proveedor.
@@ -32,7 +34,7 @@ public class ColaboradorTuristico extends Persona {
 
     public void setTipoColaborador(String tipoColaborador) {
         if (tipoColaborador == null || tipoColaborador.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El tipo de colaborador no puede estar vacío."
             );
         }
@@ -46,7 +48,7 @@ public class ColaboradorTuristico extends Persona {
 
     public void setEspecialidad(String especialidad) {
         if (especialidad == null || especialidad.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "La especialidad no puede estar vacía."
             );
         }

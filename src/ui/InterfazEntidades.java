@@ -17,6 +17,8 @@ public class InterfazEntidades {
 
     public void iniciar() {
 
+        JOptionPane.getRootFrame().setAlwaysOnTop(true);
+
         int opcion = -1;
 
         while (opcion != 0) {
@@ -86,6 +88,8 @@ public class InterfazEntidades {
                 );
             }
         }
+        JOptionPane.getRootFrame().setAlwaysOnTop(false);
+
     }
 
     private void registrarGuiaTuristico() {

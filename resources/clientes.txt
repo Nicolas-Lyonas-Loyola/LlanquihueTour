@@ -1,0 +1,5 @@
+Ana Pérez;11111111-1;ana.perez@email.com;56911112222;Los Alerces;125;Llanquihue;Los Lagos;Frecuente;Tours gastronómicos
+Carlos Soto;22222222-2;carlos.soto@email.com;56933334444;Vicente Pérez Rosales;450;Puerto Varas;Los Lagos;Nuevo;Paseos lacustres
+María Torres;33333333-3;maria.torres@email.com;56955556666;Bernardo O'Higgins;780;Frutillar;Los Lagos;Frecuente;Rutas culturales
+Felipe Vargas;44444444-4;felipe.vargas@email.com;56977778888;San Martín;320;Puerto Montt;Los Lagos;Corporativo;Excursiones personalizadas
+Daniela Muñoz;55555555-5;daniela.munoz@email.com;56999990000;Manuel Montt;615;Llanquihue;Los Lagos;Nuevo;Turismo de naturaleza

@@ -1,5 +1,7 @@
 package model;
 
+import util.DatoInvalidoException;
+
 /**
  * Representa una dirección física asociada a una persona vinculada a Llanquihue Tour.
  */
@@ -24,7 +26,7 @@ public class Direccion {
 
     public void setCalle(String calle) {
         if (calle == null || calle.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "La calle no puede estar vacía."
             );
         }
@@ -38,7 +40,7 @@ public class Direccion {
 
     public void setNumero(int numero) {
         if (numero <= 0) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "El número de dirección debe ser mayor que cero."
             );
         }
@@ -52,7 +54,7 @@ public class Direccion {
 
     public void setComuna(String comuna) {
         if (comuna == null || comuna.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "La comuna no puede estar vacía."
             );
         }
@@ -66,7 +68,7 @@ public class Direccion {
 
     public void setRegion(String region) {
         if (region == null || region.trim().isEmpty()) {
-            throw new IllegalArgumentException(
+            throw new DatoInvalidoException(
                     "La región no puede estar vacía."
             );
         }

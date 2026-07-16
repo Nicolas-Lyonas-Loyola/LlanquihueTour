@@ -2,7 +2,7 @@ package util;
 
 /**
  * Clase de apoyo para validar los datos provenientes
- * del archivo colaboradores.csv.
+ * del archivo colaboradores.txt.
  */
 public class ValidadorDatos {
 
